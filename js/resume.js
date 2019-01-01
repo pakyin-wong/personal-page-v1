@@ -25,4 +25,39 @@
     target: '#sideNav'
   });
 
+  $.ajax({
+    url: "https://www.googleapis.com/blogger/v3/blogs/6631528436700468308/posts?key=AIzaSyAhMRY_o7ncGOuaZP1zFvzx0dYJPGNmFXg", 
+    success: function(result){
+              var blogposts = "";
+              var emptyline = "<p></p>";
+              var blognumber = "Page: ";
+              $.each(result.items , function (index, value){
+                if (index == "0")
+                  blogposts += "<div id='blogpost" + index + "'>";
+                else
+                  blogposts += "<div id='blogpost" + index + "' style='display:none'>";
+                blogposts += "<div class='subheading'>";
+                blogposts +=  value.title ;
+                blogposts += "<br/>" + "<u>" +value.published.substring(0,value.published.indexOf('T')) + "</u>";
+                blogposts += "</div>";
+                blogposts += "<p>&nbsp;</p>";
+                blogposts += "<p>";
+                blogposts += value.content;
+                blogposts += "</p>";
+                blogposts += "</div>";
+                
+                blognumber += "<a id='blognumber" + index + "' href='#awards'>" + (index + 1) + "</a>&nbsp;";
+              });
+
+              $("#posts").html(blogposts + emptyline + blognumber);
+
+              $.each(result.items , function (index, value){
+                $('#blognumber' + index).click(function(){
+                  $("div[id^='blogpost']").hide();
+                  $('#blogpost' + index).show();
+                });
+              });
+            }
+    });
+
 })(jQuery); // End of use strict
