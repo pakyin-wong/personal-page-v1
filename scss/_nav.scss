@@ -23,6 +23,11 @@
 
     width: $sidebar-base-width;
     height: 100vh;
+    .pixel-font {
+      font-family: 'ZCOOL KuaiLe', cursive;
+
+      font-size: 28px;
+    }
     .navbar-brand {
       display: flex;
 

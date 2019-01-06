@@ -30,12 +30,15 @@
     success: function(result){
               var blogposts = "";
               var emptyline = "<p></p>";
-              var blognumber = "Page: ";
+              var blognumber = "Blog: ";
               $.each(result.items , function (index, value){
-                if (index == "0")
+                if (index == "0"){
                   blogposts += "<div id='blogpost" + index + "'>";
-                else
+                  blognumber += "<a name='blognumber" + index + "' href='#awards'>[" + (index + 1) + "]</a>&nbsp;";
+                }else{
                   blogposts += "<div id='blogpost" + index + "' style='display:none'>";
+                  blognumber += "<a name='blognumber" + index + "' href='#awards'>" + (index + 1) + "</a>&nbsp;";
+                }
                 blogposts += "<div class='subheading'>";
                 blogposts +=  value.title ;
                 blogposts += "<br/>" + "<u>" +value.published.substring(0,value.published.indexOf('T')) + "</u>";
@@ -46,18 +49,32 @@
                 blogposts += "</p>";
                 blogposts += "</div>";
                 
-                blognumber += "<a id='blognumber" + index + "' href='#awards'>" + (index + 1) + "</a>&nbsp;";
+                
               });
 
-              $("#posts").html(blogposts + emptyline + blognumber);
+              $("#posts").html(blognumber + emptyline + blogposts + emptyline + blognumber );
 
               $.each(result.items , function (index, value){
-                $('#blognumber' + index).click(function(){
+                $("a[name='blognumber" + index + "']").click(function(){
                   $("div[id^='blogpost']").hide();
-                  $('#blogpost' + index).show();
+                  $('#blogpost' + index).show();                  
+                  $("a[name^='blognumber']").each( function(){
+                    $(this).html($(this).html().replace('[','').replace(']',''));
+                  });
+                  $("a[name='blognumber" + index + "']").html('[' + (index + 1 ) + ']');
                 });
               });
             }
-    });
+  });
+
+  // Hide navbar when modals trigger
+  $('.portfolio-modal').on('show.bs.modal', function(e) {
+    $('.navbar').addClass('d-none');
+  })
+  $('.portfolio-modal').on('hidden.bs.modal', function(e) {
+    $('.navbar').removeClass('d-none');
+  })
+
+
 
 })(jQuery); // End of use strict
