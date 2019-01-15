@@ -1,1 +1,0 @@
-npx uglifyjs ./js/resume.js -o ./js/resume.min.js
