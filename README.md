@@ -9,7 +9,7 @@ This page is forked from startbootstrap (https://startbootstrap.com/template-ove
 
 ## What the page has
 - Google Analytics
-- 
+- Blog API to blogspot.com
 
 ## Usage (Referenced from the author)
 ### Basic Usage
@@ -21,7 +21,7 @@ After downloading, simply edit the HTML and CSS files included with the template
 After installation, run `npm install` and then run `gulp dev` which will open up a preview of the template in your default browser, watch for changes to core template files, and live reload the browser when changes are saved. You can view the `gulpfile.js` to see which tasks are included with the dev environment.
 
 #### Gulp Tasks
-For newer npm, please run the following command first.
+For newer npm, please run the following command first. (Related issue: https://github.com/gulpjs/gulp/issues/2246)
 ```
 npm install natives@1.1.6
 ```
@@ -33,6 +33,11 @@ Gulp Tasks
 - `gulp css` compiles SCSS files into CSS and minifies the compiled CSS
 - `gulp js` minifies the themes JS file
 - `gulp vendor` copies dependencies from node_modules to the vendor directory
+```
+
+#### Build the minimal package
+```
+. build_patch.sh
 ```
 
 ## Reference
